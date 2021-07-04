@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+
+*.egg-info/
+.installed.cfg
+*/*.egg
+*/.tox
+
+
+# Unit test / coverage reports
+*/venv/
+
+### PyCharm ###
+.idea/*
+

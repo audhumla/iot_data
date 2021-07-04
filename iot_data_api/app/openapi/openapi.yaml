@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: Save iot data
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /healthz:
+    get:
+      tags:
+      - healthz
+      summary: "Status of the application"
+      operationId: get_healthz
+      x-openapi-router-controller: app.controllers.healthz_controller
+      responses:
+        "200":
+          description: Health Check report
+
+  /data:
+    post:
+      tags:
+      - iot_data
+      summary: "Create new iot data entry (sensorId, temperature, humidity)"
+      operationId: create_iot_data_entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Data'
+        required: true
+      x-openapi-router-controller: app.controllers.iot_data_controller
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Healthcheck:
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: status of the application
+    Entry:
+      required:
+      - humidity
+      - sensorId
+      - temperature
+      type: object
+      properties:
+        sensorId:
+          type: string
+        humidity:
+          type: number
+          description: humidity in percentage
+          format: int32
+        temperature:
+          type: number
+          format: float
+      example:
+        sensorId: dining room
+        humidity: 66
+        temperature: 20.1
+    Data:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entry'
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+      example:
+        code: 500
+        message: Internal error
