@@ -21,3 +21,6 @@ __pycache__/
 ### PyCharm ###
 .idea/*
 
+# Docker data
+docker_data
+

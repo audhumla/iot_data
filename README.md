@@ -10,6 +10,12 @@ Python 3.9.x+
 
 ## Project
 
+### Run the project
+To start the whole stack, you can run it using docker-compose:
+```bash
+docker-compose up -d
+```
+
 ### [IoT data api](iot_data_api)
 
 A server using Flask that exposes api to save temperature and humidity data.

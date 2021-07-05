@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  questdb:
+    image: "questdb/questdb:6.0.3"
+    volumes:
+      - ./docker_data/questdb:/root/.questdb/db
+    ports:
+      - "9000:9000"
+      - "8812:8812"
+  iot_data_api:
+    build:
+      context: iot_data_api
+    ports:
+      - "8080:8080"
